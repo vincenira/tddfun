@@ -10,7 +10,7 @@ an easy refactoring and separated concern
 */
 
 func Jambo() string {
-	return "Jambo wetu"
+	return "Jambo, wetu"
 }
 
 func main() {
