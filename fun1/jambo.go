@@ -9,10 +9,14 @@ because the print and instantiation for the word allows
 an easy refactoring and separated concern
 */
 
-func Jambo() string {
-	return "Jambo, wetu"
+// Const information on the variable helps to capture the essential of the variable and also aid the performance of the program
+// the essential, here is that the variable will not change throughout the execution life of the program
+const greetingWithPrefix = "Jambo, "
+
+func Jambo(Name string) string {
+	return greetingWithPrefix + Name
 }
 
 func main() {
-	fmt.Println(Jambo())
+	fmt.Println(Jambo("Peter"))
 }
