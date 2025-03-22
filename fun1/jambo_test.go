@@ -23,32 +23,34 @@ func TestJambo(t *testing.T) {
 	t.Run("English: Greeting", func(t *testing.T) {
 		got := Jambo("wetu", "English")
 		want := "Hello, wetu"
-		if got != want {
-			t.Errorf("got %q want %q", got, want)
-		}
+		assertCorrectGreeting(t, got, want)
 	})
 
 	t.Run("Spanish: Greetings", func(t *testing.T) {
 		got := Jambo("wetu", "Spanish")
 		want := "Hola, wetu"
-		if got != want {
-			t.Errorf("got %q want %q", got, want)
-		}
+		assertCorrectGreeting(t, got, want)
 	})
 
 	t.Run("French: Greetings", func(t *testing.T) {
 		got := Jambo("wetu", "French")
 		want := "Salut, wetu"
-		if got != want {
-			t.Errorf("got %q want %q", got, want)
-		}
+		assertCorrectGreeting(t, got, want)
 	})
 
 	t.Run("Chinese: Greetings", func(t *testing.T) {
 		got := Jambo("wetu", "Chinese")
 		want := "Nǐ hǎo, wetu"
-		if got != want {
-			t.Errorf("got %q want %q", got, want)
-		}
+		assertCorrectGreeting(t, got, want)
 	})
+}
+
+// we pass as argument t with type testing.TB to allow the assertCorrectGreeting()
+// to access error information from the entire testing code when it fails
+func assertCorrectGreeting(t testing.TB, got, want string) {
+	t.Helper()
+
+	if got != want {
+		t.Errorf("got %q want %q", got, want)
+	}
 }
