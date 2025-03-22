@@ -12,6 +12,12 @@ an easy refactoring and separated concern
 // Const information on the variable helps to capture the essential of the variable and also aid the performance of the program
 // the essential, here is that the variable will not change throughout the execution life of the program
 const (
+	langSwa = "Swahili"
+	langEng = "English"
+	langSpa = "Spanish"
+	langFre = "French"
+	langChi = "Chinese"
+
 	swahiliGreetingWithPrefix = "Jambo, "
 	englishGreetingWithPrefix = "Hello, "
 	spanishGreetingWithPrefix = "Hola, "
@@ -21,29 +27,24 @@ const (
 
 func Jambo(Name, Language string) string {
 	response := ""
-	if Name == "" || Language == "" {
+	// if you find that there is a lot of if statement of a same variable with multiple values
+	// it means a switch statement should replace it
+
+	switch Language {
+	case langSwa:
+		response = swahiliGreetingWithPrefix + Name
+	case langEng:
+		response = englishGreetingWithPrefix + Name
+	case langSpa:
+		response = spanishGreetingWithPrefix + Name
+	case langFre:
+		response = frenchGreetingWithPrefix + Name
+	case langChi:
+		response = chineseGreetingWithPrefix + Name
+	default:
 		response = swahiliGreetingWithPrefix + "wetu"
 	}
 
-	if Language == "Swahili" {
-		response = swahiliGreetingWithPrefix + Name
-	}
-
-	if Language == "English" {
-		response = englishGreetingWithPrefix + Name
-	}
-
-	if Language == "Spanish" {
-		response = spanishGreetingWithPrefix + Name
-	}
-
-	if Language == "French" {
-		response = frenchGreetingWithPrefix + Name
-	}
-
-	if Language == "Chinese" {
-		response = chineseGreetingWithPrefix + Name
-	}
 	return response
 }
 
