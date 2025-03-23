@@ -24,3 +24,16 @@ func BenchmarkRepeat(b *testing.B) {
 		Repeat("a")
 	}
 }
+
+/*
+we are going to append all the code with duplicated function with a prefix EX
+To do the practical exercises
+*/
+
+func TestExRepeat(t *testing.T) {
+	repeated := ExRepeat("a", 5)
+	expected := "aaaaa"
+	if repeated != expected {
+		t.Errorf("Expected %q, but got %q", expected, repeated)
+	}
+}
