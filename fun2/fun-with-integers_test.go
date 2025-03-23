@@ -23,6 +23,6 @@ it requires the special comment
 
 func ExampleAdder() {
 	sumOfTwoIntegers := Adder(3, 9)
-	fmt.Printf("Adder(%d, %d) = %d", 3, 9, sumOfTwoIntegers)
+	fmt.Printf("%d", sumOfTwoIntegers)
 	// Output: 12
 }
