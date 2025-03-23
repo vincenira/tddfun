@@ -1,5 +1,7 @@
 package fun3
 
+import "strings"
+
 /*
 Write the minimal amout of code for the test to run and check the failing test output
 All you need to go right now is enough to make it compile so you can check your test is written well.
@@ -27,12 +29,22 @@ is created, the process to clean up the old one, it tiggers at the same time.
 Hence, the code is not optimize performance wise.
 Go provides us with the method strings.Builder of type stringsBuilder which minimize memory
 copiying and to get the string you use the method String
+`go test -bench=. -benchmen`
+```text
+10000000           25.70 ns/op           8 B/op           1 allocs/op
+PASS
+
+the `-benchmem` flag reports information about memory allocations:
+- `B/op`: the number of bytes allocated per iteration
+- `allocs/op`: the number of memory allocations per iteration
+```
 */
 func Repeat(letter string) string {
-	retLetter := ""
+	var retLetter strings.Builder
 	for range repeatedCount {
 		// += called the Add AND assignment operator""
-		retLetter += letter
+		// retLetter += letter
+		retLetter.WriteString(letter)
 	}
-	return retLetter
+	return retLetter.String()
 }
