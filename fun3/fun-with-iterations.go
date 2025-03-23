@@ -65,5 +65,9 @@ we are going to append all the code with duplicated function with a prefix EX
 To do the practical exercises
 */
 func ExRepeat(character string, n int) string {
-	return ""
+	var repeatedString strings.Builder
+	for range n {
+		repeatedString.WriteString(character)
+	}
+	return repeatedString.String()
 }

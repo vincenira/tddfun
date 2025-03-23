@@ -1,6 +1,9 @@
 package fun3
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestRepeat(t *testing.T) {
 	repeated := Repeat("a")
@@ -36,4 +39,9 @@ func TestExRepeat(t *testing.T) {
 	if repeated != expected {
 		t.Errorf("Expected %q, but got %q", expected, repeated)
 	}
+}
+
+func ExampleExRepeat() {
+	fmt.Println(ExRepeat("b", 10))
+	// Output: bbbbbbbbbb
 }
