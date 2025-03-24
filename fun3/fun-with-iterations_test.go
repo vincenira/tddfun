@@ -41,6 +41,31 @@ func TestExRepeat(t *testing.T) {
 	}
 }
 
+func TestMultipleCaseExRepeat(t *testing.T) {
+	t.Run("Testing a single character input", func(t *testing.T) {
+		repeated := ExRepeat("c", 4)
+		expected := "cccc"
+		AssertCharacterRepeat(t, expected, repeated)
+	})
+	t.Run("Testing two characters input", func(t *testing.T) {
+		repeated := ExRepeat("ab", 3)
+		expected := "ababab"
+		AssertCharacterRepeat(t, expected, repeated)
+	})
+	t.Run("Testing three characters input", func(t *testing.T) {
+		repeated := ExRepeat("abc", 5)
+		expected := "abcabcabcabcabc"
+		AssertCharacterRepeat(t, expected, repeated)
+	})
+}
+
+func AssertCharacterRepeat(t testing.TB, got, want string) {
+	t.Helper()
+	if got != want {
+		t.Errorf("Expected %q, but got %q", want, got)
+	}
+}
+
 func ExampleExRepeat() {
 	fmt.Println(ExRepeat("b", 10))
 	// Output: bbbbbbbbbb
