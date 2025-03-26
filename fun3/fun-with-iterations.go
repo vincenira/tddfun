@@ -71,3 +71,12 @@ func ExRepeat(character string, n int) string {
 	}
 	return repeatedString.String()
 }
+
+func LenRepeat(word string) int {
+	lengthWord := len(word)
+	return lengthWord
+}
+
+func ExpiRepeat(character string, n int) string {
+	return strings.Repeat(character, n)
+}

@@ -28,6 +28,12 @@ func BenchmarkRepeat(b *testing.B) {
 	}
 }
 
+func BenchmarkExpiRepeat(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		ExpiRepeat("a", 5)
+	}
+}
+
 /*
 we are going to append all the code with duplicated function with a prefix EX
 To do the practical exercises
@@ -57,6 +63,32 @@ func TestMultipleCaseExRepeat(t *testing.T) {
 		expected := "abcabcabcabcabc"
 		AssertCharacterRepeat(t, expected, repeated)
 	})
+}
+
+func TestMultipleCaseExperiRepeat(t *testing.T) {
+	t.Run("[ExpiRepeat]Testing a single character input", func(t *testing.T) {
+		repeated := ExpiRepeat("c", 4)
+		expected := "cccc"
+		AssertCharacterRepeat(t, expected, repeated)
+	})
+	t.Run("[ExpiRepeat]Testing two characters input", func(t *testing.T) {
+		repeated := ExpiRepeat("ab", 3)
+		expected := "ababab"
+		AssertCharacterRepeat(t, expected, repeated)
+	})
+	t.Run("[ExpiRepeat]Testing three characters input", func(t *testing.T) {
+		repeated := ExpiRepeat("abc", 5)
+		expected := "abcabcabcabcabc"
+		AssertCharacterRepeat(t, expected, repeated)
+	})
+}
+
+func TestExperiLength(t *testing.T) {
+	got := LenRepeat("aaaaaaa")
+	want := 7
+	if got != want {
+		t.Errorf("got %d want %d", got, want)
+	}
 }
 
 func AssertCharacterRepeat(t testing.TB, got, want string) {
