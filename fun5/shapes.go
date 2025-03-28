@@ -9,6 +9,12 @@ func Perimeter(x, y float64) float64 {
 */
 
 // refactor the code
+// since nothing indicates, it is a rectangle. Let's create our own type using struct
+
+type Rectangle struct {
+	width  float64
+	height float64
+}
 
 func Perimeter(width, height float64) float64 {
 	return 2 * (width + height)
