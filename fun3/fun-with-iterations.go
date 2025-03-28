@@ -1,3 +1,4 @@
+// fun3: iteration
 package fun3
 
 import "strings"
