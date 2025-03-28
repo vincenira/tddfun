@@ -1,3 +1,4 @@
+// fun4: arrays and slices
 /*
 go mod init main you will presented with an error _testmain.go:13.2: cannot import "main".
 package main will only contain integration of other packages and not unit-testable code
