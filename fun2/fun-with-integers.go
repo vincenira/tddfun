@@ -1,3 +1,4 @@
+// fun2: integers
 package fun2
 
 // Initial function with minimal code to make the go compiler not fail

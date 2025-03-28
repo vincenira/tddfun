@@ -1,3 +1,4 @@
+// fun2: integers
 package fun2
 
 import (
