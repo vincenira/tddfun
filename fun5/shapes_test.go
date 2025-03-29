@@ -26,7 +26,9 @@ func TestArea(t *testing.T) {
 
 func TestPerimeter(t *testing.T) {
 	rectangle := Rectangle{10.0, 10.0}
-	got := Perimeter(rectangle.width, rectangle.height)
+	// got := Perimeter(rectangle.width, rectangle.height)
+	// refactor to pass the object Rectangle as an argument
+	got := Perimeter(rectangle)
 	want := 40.0
 
 	if got != want {
