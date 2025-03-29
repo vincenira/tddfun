@@ -22,8 +22,10 @@ type Circle struct {
 	Radius float64
 }
 
+// it is a convention in Go to have the receiver variable be the first letter of the type
+// for example: r Rectange(since the letter r is the first letter of the Type Rectangle)
 func (c Circle) Area() float64 {
-	return c.Radius * c.Radius * 3.141592653589793
+	return c.Radius * c.Radius * math.Pi
 }
 
 func (r Rectangle) Area() float64 {
