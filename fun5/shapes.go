@@ -1,5 +1,7 @@
 package fun5
 
+import "math"
+
 // initial commit with test case and the minimal amount of code for test to run
 // and check the failing test output
 /*
