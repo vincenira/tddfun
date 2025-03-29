@@ -70,3 +70,27 @@ func TestGeometryShapes(t *testing.T) {
 		}
 	})
 }
+
+/*
+Notice how our helper does not need to concern itself with whether the shape is a Rectangle or a Circle or a Triangle. By declaring an interface,
+the helper is decoupled from the concrete types and only has the method it needs to do its job.
+*/
+
+func TestShapeArea(t *testing.T) {
+	checkArea := func(t testing.TB, shape Shape, want float64) {
+		t.Helper()
+		got := shape.Area()
+		if got != want {
+			t.Errorf("got %g want %g", got, want)
+		}
+	}
+
+	t.Run("Calculate Area of a rectangle", func(t *testing.T) {
+		rectangle := Rectangle{12, 6}
+		checkArea(t, rectangle, 72.0)
+	})
+	t.Run("Calculate Area of a circle", func(t *testing.T) {
+		circle := Circle{10}
+		checkArea(t, circle, 314.1592653589793)
+	})
+}

@@ -9,6 +9,13 @@ func Perimeter(x, y float64) float64 {
 	return 0.0
 }
 */
+// let's tell Go what a Shape is using an interface
+
+// In go interface resolution is implicit. if the ype you pass in matches what the inteface
+// is asking for, it will compile
+type Shape interface {
+	Area() float64
+}
 
 // refactor the code
 // since nothing indicates, it is a rectangle. Let's create our own type using struct
@@ -28,6 +35,11 @@ func (c Circle) Area() float64 {
 	return c.Radius * c.Radius * math.Pi
 }
 
+/*
+There is some duplication in our tests
+all we want to do is take a collection of shapes, call the Area() method on them and then
+check the result
+*/
 func (r Rectangle) Area() float64 {
 	return r.height * r.width
 }
