@@ -21,12 +21,17 @@ type Shape interface {
 // since nothing indicates, it is a rectangle. Let's create our own type using struct
 
 type Rectangle struct {
-	width  float64
-	height float64
+	Width  float64
+	Height float64
 }
 
 type Circle struct {
 	Radius float64
+}
+
+type Triangle struct {
+	Base   float64
+	Height float64
 }
 
 // it is a convention in Go to have the receiver variable be the first letter of the type
@@ -41,11 +46,16 @@ all we want to do is take a collection of shapes, call the Area() method on them
 check the result
 */
 func (r Rectangle) Area() float64 {
-	return r.height * r.width
+	return r.Height * r.Width
+}
+
+// Add a new shape Triangle
+func (t Triangle) Area() float64 {
+	return (t.Base * t.Height) / 2
 }
 
 func Perimeter(rect Rectangle) float64 {
-	return 2 * (rect.width + rect.height)
+	return 2 * (rect.Width + rect.Height)
 }
 
 /*
@@ -66,5 +76,5 @@ We can define methods on our newly defined types instead.
 	}
 */
 func Area(rect Rectangle) float64 {
-	return rect.width * rect.height
+	return rect.Width * rect.Height
 }
