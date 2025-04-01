@@ -13,9 +13,10 @@ func TestWallet(t *testing.T) {
 	got := wallet.Balance()
 	// print the address of the memory
 	fmt.Printf("address of balance in test is %p \n", &wallet.balance)
-	want := Bitcoin(10)
+	want := Bitcoin(20)
 
+	// Update our test format to use strings
 	if got != want {
-		t.Errorf("got %d want %d", got, want)
+		t.Errorf("got %s want %s", got, want)
 	}
 }

@@ -12,6 +12,11 @@ type (
 	Wallet  struct {
 		balance Bitcoin
 	}
+	// This interface is defined in the fmt package and lets you define how your type is printed
+	// when used with %s format string in prints
+	Stringer interface {
+		String() string
+	}
 )
 
 /*
@@ -37,4 +42,9 @@ func (w *Wallet) Deposit(amount Bitcoin) {
 
 func (w *Wallet) Balance() Bitcoin {
 	return w.balance
+}
+
+// As you can see, the syntax for creating a method on a type declaration is the same as it is on a struct.
+func (b Bitcoin) String() string {
+	return fmt.Sprintf("%d BTC", b)
 }
