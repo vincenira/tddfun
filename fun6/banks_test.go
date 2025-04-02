@@ -38,4 +38,17 @@ func TestWallet(t *testing.T) {
 		// Update our test format to use strings
 		assertBalance(t, wallet, want)
 	})
+
+	t.Run("Withdraw insufficient funds", func(t *testing.T) {
+		startingBalance := Bitcoin(20)
+		wallet := Wallet{startingBalance}
+		err := wallet.Withdraw(Bitcoin(100))
+
+		assertBalance(t, wallet, startingBalance)
+		// If you see a function that takes
+		// arguments or returns values that are interfaces, they can be nillable.
+		if err == nil {
+			t.Error("Wanted an error but didn't get one")
+		}
+	})
 }

@@ -1,6 +1,9 @@
 package fun6
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 /*
 Since we are creating a bitcoin,
@@ -49,6 +52,11 @@ func (b Bitcoin) String() string {
 	return fmt.Sprintf("%d BTC", b)
 }
 
-func (w *Wallet) Withdraw(amount Bitcoin) {
+// To signal a problem in go, it is idiomatic to return an error for the caller to check and act on
+func (w *Wallet) Withdraw(amount Bitcoin) error {
+	if amount > w.balance {
+		return errors.New("oh no, insufficient funds")
+	}
 	w.balance -= amount
+	return nil
 }
