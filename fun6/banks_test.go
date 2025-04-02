@@ -25,6 +25,13 @@ func TestWallet(t *testing.T) {
 			t.Errorf("got %q, want %q", got, want)
 		}
 	}
+
+	assertNoError := func(t testing.TB, got error) {
+		t.Helper()
+		if got != nil {
+			t.Fatal("got an error but did not want one")
+		}
+	}
 	t.Run("Deposit", func(t *testing.T) {
 		wallet := Wallet{}
 
@@ -42,7 +49,10 @@ func TestWallet(t *testing.T) {
 		wallet := Wallet{balance: Bitcoin(20)}
 		// no need to initial _ because it represents no value
 		// Therefore = is sufficient instead of := notation
-		_ = wallet.Withdraw(Bitcoin(10))
+		//_ = wallet.Withdraw(Bitcoin(10))
+
+		err := wallet.Withdraw(Bitcoin(10))
+		assertNoError(t, err)
 
 		// print the address of the memory
 		want := Bitcoin(10)
