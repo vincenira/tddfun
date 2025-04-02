@@ -53,9 +53,14 @@ func (b Bitcoin) String() string {
 }
 
 // To signal a problem in go, it is idiomatic to return an error for the caller to check and act on
+
+// Refactor error by being descriptive with our error
+// var keyword allows us to define values global to the the package
+var ErrInsufficientFunds = errors.New("Cannot withdraw, insufficient funds")
+
 func (w *Wallet) Withdraw(amount Bitcoin) error {
 	if amount > w.balance {
-		return errors.New("oh no, insufficient funds")
+		return ErrInsufficientFunds
 	}
 	w.balance -= amount
 	return nil
