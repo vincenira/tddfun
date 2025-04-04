@@ -37,10 +37,10 @@ func TestAdd(t *testing.T) {
 
 	dictionary.Add(word, definition)
 
-	AsserDefinition(t, dictionary, word, definition)
+	assertDefinition(t, dictionary, word, definition)
 }
 
-func AsserDefinition(t testing.TB, dictionary Dictionary, word, definition string) {
+func assertDefinition(t testing.TB, dictionary Dictionary, word, definition string) {
 	t.Helper()
 	got, err := dictionary.Search(word)
 	if err != nil {
