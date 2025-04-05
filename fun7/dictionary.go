@@ -12,6 +12,8 @@ const (
 	ErrWordDoesNotExist = DictionaryError("cannot perform operation on word because it does not exist")
 )
 
+type Dictionary map[string]string
+
 func (d Dictionary) Search(word string) (string, error) {
 	definition, ok := d[word]
 
