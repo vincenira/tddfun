@@ -1,14 +1,15 @@
 package fun7
 
-import (
-	"errors"
-)
+type DictionaryError string
 
-type Dictionary map[string]string
+func (e DictionaryError) Error() string {
+	return string(e)
+}
 
-var (
-	ErrNotFound   = errors.New("Could not find the word you were looking for")
-	ErrWordExists = errors.New("cannot add word because it already exists")
+const (
+	ErrNotFound         = DictionaryError("Could not find the word you were looking for")
+	ErrWordExists       = DictionaryError("cannot add word because it already exists")
+	ErrWordDoesNotExist = DictionaryError("cannot perform operation on word because it does not exist")
 )
 
 func (d Dictionary) Search(word string) (string, error) {
