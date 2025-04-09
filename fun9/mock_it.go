@@ -12,7 +12,35 @@ const (
 	countDownStart = 3
 )
 
-func Countdown(out io.Writer) {
+type SpyCountdownOperations struct {
+	Calls []string
+}
+
+func (s *SpyCountdownOperations) Sleep() {
+	s.Calls = append(s.Calls, sleep)
+}
+
+func (s *SpyCountdownOperations) Write(p []byte) (n int, err error) {
+	s.Calls = append(s.Calls, write)
+	return
+}
+
+const (
+	write = "write"
+	sleep = "sleep"
+)
+
+type Sleeper interface {
+	Sleep()
+}
+
+type DefaultSleeper struct{}
+
+func (d *DefaultSleeper) Sleep() {
+	time.Sleep(1 * time.Second)
+}
+
+func Countdown(out io.Writer, sleeper Sleeper) {
 	for i := countDownStart; i > 0; i-- {
 		fmt.Fprintln(out, i)
 		sleeper.Sleep()
@@ -21,5 +49,6 @@ func Countdown(out io.Writer) {
 }
 
 func main() {
-	Countdown(os.Stdout)
+	sleeper := &DefaultSleeper{}
+	Countdown(os.Stdout, sleeper)
 }

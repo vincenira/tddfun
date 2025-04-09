@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"reflect"
 	"testing"
 )
 
@@ -12,19 +13,40 @@ way of capturing that as an interface in Go.
 - In test we will send to bytes.Buffer so our tests can capture what data is being generated.
 */
 func TestCountdown(t *testing.T) {
-	buffer := &bytes.Buffer{}
+	t.Run("Prints 3 to Go!", func(t *testing.T) {
+		buffer := &bytes.Buffer{}
 
-	Countdown(buffer)
+		Countdown(buffer, &SpyCountdownOperations{})
 
-	got := buffer.String()
-	want := `3
+		got := buffer.String()
+		want := `3
 2
 1
 Go!`
 
-	if got != want {
-		t.Errorf("got %q want %q", got, want)
-	}
+		if got != want {
+			t.Errorf("got %q want %q", got, want)
+		}
+	})
+
+	t.Run("sleep before every print", func(t *testing.T) {
+		spySleepPrinter := &SpyCountdownOperations{}
+		Countdown(spySleepPrinter, spySleepPrinter)
+
+		want := []string{
+			write,
+			sleep,
+			write,
+			sleep,
+			write,
+			sleep,
+			write,
+		}
+
+		if !reflect.DeepEqual(want, spySleepPrinter.Calls) {
+			t.Errorf("wanted calls %v got %v", want, spySleepPrinter.Calls)
+		}
+	})
 }
 
 /*
