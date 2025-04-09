@@ -15,7 +15,7 @@ const (
 func Countdown(out io.Writer) {
 	for i := countDownStart; i > 0; i-- {
 		fmt.Fprintln(out, i)
-		time.Sleep(1 * time.Second)
+		sleeper.Sleep()
 	}
 	fmt.Fprint(out, finalWord)
 }
