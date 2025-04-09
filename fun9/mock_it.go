@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io"
+	"iter"
 	"os"
 	"time"
 )
@@ -65,6 +66,36 @@ func Countdown(out io.Writer, sleeper Sleeper) {
 	fmt.Fprint(out, finalWord)
 }
 
+/*
+We can make the code more readable with an iterator custom
+Function signature of an custom iterator
+To write an iterator like countDownFrom, you need to write a function in a particular way. From the docs:
+
+The “range” clause in a “for-range” loop now accepts iterator functions of
+the following types
+
+	func(func() bool)
+	func(func(K) bool)
+	func(func(K, V) bool)
+*/
+func CountdownRange(out io.Writer, sleeper Sleeper) {
+	for i := range countDownFrom(countDownStart) {
+		fmt.Fprintln(out, i)
+		sleeper.Sleep()
+	}
+	fmt.Fprint(out, finalWord)
+}
+
+func countDownFrom(from int) iter.Seq[int] {
+	return func(yield func(int) bool) {
+		for i := from; i > 0; i-- {
+			if !yield(i) {
+				return
+			}
+		}
+	}
+}
+
 func main() {
 	/*
 	   let's use the configurableSleeper
@@ -73,4 +104,6 @@ func main() {
 	*/
 	sleeper := &ConfigurableSleeper{1 * time.Second, time.Sleep}
 	Countdown(os.Stdout, sleeper)
+	fmt.Println("Second countDown")
+	CountdownRange(os.Stdout, sleeper)
 }
