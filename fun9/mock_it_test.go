@@ -26,3 +26,18 @@ Go!`
 		t.Errorf("got %q want %q", got, want)
 	}
 }
+
+/*
+Our tests take 3 seconds to run.
+- Every forward-thinking post about software development emphasises the importance of
+  quick feedback loops.
+- Slow tests ruin developer productivity.
+- Imagine if the requirements get more sophisticated warranting more tests.
+ Are we happy with 3s added to the test run for every new test of Countdown?
+
+We have not tested an important property of our function
+We have a dependency on Sleeping which we need to extract so we can then control it
+in our tests.
+If we can mock time.Sleep we can use dependency injection to use it instead of a
+"real" time.Sleep and then we can spy on the calls to make assertions on them.
+*/
