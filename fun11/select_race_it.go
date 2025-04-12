@@ -5,6 +5,24 @@ with 10 seconds then it should return an error
 */
 package fun11
 
+import (
+	"net/http"
+	"time"
+)
+
+func measureResponseTime(url string) time.Duration {
+	start := time.Now()
+	http.Get(url)
+	return time.Since(start)
+}
+
 func Racer(a, b string) (winner string) {
-	return
+	aDuration := measureResponseTime(a)
+
+	bDuration := measureResponseTime(b)
+
+	if aDuration < bDuration {
+		return a
+	}
+	return b
 }
