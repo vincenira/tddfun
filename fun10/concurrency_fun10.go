@@ -1,8 +1,12 @@
 package fun10
 
-import "time"
-
-type WebsiteChecker func(string) bool
+type (
+	WebsiteChecker func(string) bool
+	result         struct {
+		string
+		bool
+	}
+)
 
 func CheckWebsites(wc WebsiteChecker, urls []string) map[string]bool {
 	results := make(map[string]bool)
@@ -15,12 +19,19 @@ func CheckWebsites(wc WebsiteChecker, urls []string) map[string]bool {
 
 func ConcCheckWebsites(wc WebsiteChecker, urls []string) map[string]bool {
 	results := make(map[string]bool)
+	resultChannel := make(chan result)
 
 	for _, url := range urls {
 		go func() {
-			results[url] = wc(url)
+			// Send Statement
+			resultChannel <- result{url, wc(url)}
 		}()
-		time.Sleep(2 * time.Second)
+	}
+
+	for i := 0; i < len(urls); i++ {
+		// Receive Statement
+		r := <-resultChannel
+		results[r.string] = r.bool
 	}
 	return results
 }
