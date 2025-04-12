@@ -22,7 +22,7 @@ func BenchmarkCheckWebsites(b *testing.B) {
 	}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		CheckWebsites(slowStubWebsiteChecker, urls)
+		ConcCheckWebsites(slowStubWebsiteChecker, urls)
 	}
 }
 
