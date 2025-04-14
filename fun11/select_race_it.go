@@ -6,6 +6,7 @@ with 10 seconds then it should return an error
 package fun11
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 )
@@ -43,11 +44,13 @@ to a channel with myVar := <-ch. This is a blocking call, as you're waiting for 
 select allows you to wait on multiple channels. The first one to send a value "wins"
 and the code underneath the case is execute
 */
-func ConcRacer(a, b string) (winner string) {
+func ConcRacer(a, b string) (winner string, error error) {
 	select {
 	case <-ping(a):
-		return a
+		return a, nil
 	case <-ping(b):
-		return b
+		return b, nil
+	case <-time.After(10 * time.Second):
+		return "", fmt.Errorf("time out waiting for %s and %s", a, b)
 	}
 }
