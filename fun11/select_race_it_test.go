@@ -33,3 +33,39 @@ func TestRacer(t *testing.T) {
 		t.Errorf("got %q want %q", got, want)
 	}
 }
+
+func TestConcRacer(t *testing.T) {
+	t.Run("compares speeds of servers, returning the url of the fastest one", func(t *testing.T) {
+		slowServer := makeDelayedServer(20 * time.Millisecond)
+
+		fastServer := makeDelayedServer(0 * time.Millisecond)
+
+		defer slowServer.Close()
+		defer fastServer.Close()
+
+		slowURL := slowServer.URL
+		fastURL := fastServer.URL
+
+		want := fastURL
+
+		got, _ := ConcRacer(slowURL, fastURL)
+
+		if got != want {
+			t.Errorf("got %q want %q", got, want)
+		}
+	})
+
+	t.Run("returns an error if a server doesn't respond with 10s", func(t *testing.T) {
+		serverA := makeDelayedServer(11 * time.Second)
+		serverB := makeDelayedServer(12 * time.Second)
+
+		defer serverA.Close()
+		defer serverB.Close()
+
+		_, err := ConcRacer(serverA.URL, serverB.URL)
+
+		if err == nil {
+			t.Errorf("expected an error but didn't get one")
+		}
+	})
+}
