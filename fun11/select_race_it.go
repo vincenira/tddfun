@@ -44,13 +44,21 @@ to a channel with myVar := <-ch. This is a blocking call, as you're waiting for 
 select allows you to wait on multiple channels. The first one to send a value "wins"
 and the code underneath the case is execute
 */
+// make the timeout Configurable to facilitate test since 10 seconds can be longer.
+// Since we don't care about the timeout in happy test, we can be strategic in our implementation
+var tenSecondTimeout = 10 * time.Second
+
 func ConcRacer(a, b string) (winner string, error error) {
+	return ConfigurableConcRacer(a, b, tenSecondTimeout)
+}
+
+func ConfigurableConcRacer(a, b string, timeout time.Duration) (winner string, error error) {
 	select {
 	case <-ping(a):
 		return a, nil
 	case <-ping(b):
 		return b, nil
-	case <-time.After(10 * time.Second):
+	case <-time.After(timeout):
 		return "", fmt.Errorf("time out waiting for %s and %s", a, b)
 	}
 }
