@@ -1,6 +1,7 @@
 package fun13
 
 import (
+	"sync"
 	"testing"
 )
 
