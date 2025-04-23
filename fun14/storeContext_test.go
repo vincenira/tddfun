@@ -34,7 +34,10 @@ func TestServer(t *testing.T) {
 	if response.Body.String() != data {
 		t.Errorf(`got "%s", want "%s"`, response.Body.String(), data)
 	}
-
+	/*
+	   The context package provides functions to derive new context values from existing ones.
+	   These values form a tree: when a Context is canceled, all Contexts derived from it are also canceled.
+	*/
 	t.Run("tells Store to cancel work if request is cancelled", func(t *testing.T) {
 		data := "hello, world"
 		store := &SpyStore{response: data}
