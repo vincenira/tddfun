@@ -13,6 +13,20 @@ type SpyStore struct {
 	cancelled bool
 }
 
+func (s *SpyStore) assertWasCancelled() {
+	s.t.Helper()
+	if !s.cancelled {
+		s.t.Error("Store was not told to cancel")
+	}
+}
+
+func (s *SpyStore) assertWasNotCancelled() {
+	s.t.Helper()
+	if s.cancelled {
+		s.t.Error("store was told to cancel")
+	}
+}
+
 func (s *SpyStore) Fetch() string {
 	time.Sleep(100 * time.Millisecond)
 	return s.response
@@ -53,9 +67,7 @@ func TestServer(t *testing.T) {
 
 		svr.ServeHTTP(response, request)
 
-		if !store.cancelled {
-			t.Error("store was not told to cancel")
-		}
+		store.assertWasCancelled()
 	})
 	t.Run("returns data from store", func(t *testing.T) {
 		data := "hello, world"
@@ -70,9 +82,6 @@ func TestServer(t *testing.T) {
 		if response.Body.String() != data {
 			t.Errorf(`got "%s", want "%s"`, response.Body.String(), data)
 		}
-
-		if store.cancelled {
-			t.Error("it should not have cancelled the store")
-		}
+		store.assertWasNotCancelled()
 	})
 }
