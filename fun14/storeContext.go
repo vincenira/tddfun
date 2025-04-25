@@ -13,13 +13,10 @@ type Store interface {
 
 func Server(store Store) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		data, _ := store.Fetch(r.Context())
+		data, err := store.Fetch(r.Context())
+		if err != nil {
+			return // todo: log error however you like
+		}
 		fmt.Fprint(w, data)
 	}
 }
-
-type SpyResponseWriter struct {
-	written bool
-}
-
-func (s *SpyResponseWriter) Header() http.Header
