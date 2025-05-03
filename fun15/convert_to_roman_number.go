@@ -47,8 +47,9 @@ func ConvertToRoman(arabicNumber uint16) string {
 	return result.String()
 }
 
-func ConvertToArabic(romanNumber string) int {
-	arabicNumber := 0
+func ConvertToArabic(romanNumber string) uint16 {
+	var arabicNumber uint16
+	arabicNumber = 0
 
 	for _, numeral := range allRomanNumerals {
 		for strings.HasPrefix(romanNumber, numeral.Symbol) {

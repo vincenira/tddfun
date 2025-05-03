@@ -111,3 +111,19 @@ you describe always hold true. A lot of people think property based tests are ma
 data but they would be mistaken. The real challenge about property based tests is having a good
 understanding of your domain so you can write these properties.
 */
+
+func TestPropertiesOfConversion(t *testing.T) {
+	assertion := func(arabicNumber uint16) bool {
+		if arabicNumber > 3999 {
+			log.Println(arabicNumber)
+			return true
+		}
+		roman := ConvertToRoman(arabicNumber)
+		fromRoman := ConvertToArabic(roman)
+		return arabicNumber == fromRoman
+	}
+
+	if err := quick.Check(assertion, &quick.Config{MaxCount: 2000}); err != nil {
+		t.Error("failed checks", err)
+	}
+}
