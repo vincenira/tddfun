@@ -15,7 +15,7 @@ check TestOld2RomanNumerals
 	}
 */
 type RomanNumeral struct {
-	Value  int
+	Value  uint16
 	Symbol string
 }
 
@@ -35,7 +35,7 @@ var allRomanNumerals = []RomanNumeral{
 	{1, "I"},
 }
 
-func ConvertToRoman(arabicNumber int) string {
+func ConvertToRoman(arabicNumber uint16) string {
 	var result strings.Builder
 
 	for _, numeral := range allRomanNumerals {
