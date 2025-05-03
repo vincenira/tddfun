@@ -76,7 +76,7 @@ func TestConvertToRoman(t *testing.T) {
 		{"3999 gets converted to MMMCMXCIX", 3999, "MMMCMXCIX"},
 		{"2014 gets converted to MMXIV", 2014, "MMXIV"},
 		{"1006 gets converted to MVI", 1006, "MVI"},
-		{"798 gets converted to DCCXCVIII", 1006, "DCCXCVIII"},
+		{"798 gets converted to DCCXCVIII", 798, "DCCXCVIII"},
 	}
 
 	for _, test := range cases {
