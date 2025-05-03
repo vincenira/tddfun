@@ -102,3 +102,10 @@ func TestConvertingToArabic(t *testing.T) {
 		})
 	}
 }
+
+/*
+Property based tests help you do this by throwing random data at your code and verifying the rules
+you describe always hold true. A lot of people think property based tests are mainly about random
+data but they would be mistaken. The real challenge about property based tests is having a good
+understanding of your domain so you can write these properties.
+*/
