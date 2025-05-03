@@ -51,7 +51,7 @@ since we have some repetition in our testcase
 */
 var cases = []struct {
 	Description  string
-	NumberArabic int
+	NumberArabic uint16
 	NumberRoman  string
 }{
 	{"1 gets converted to I", 1, "I"},
