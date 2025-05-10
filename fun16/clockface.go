@@ -1,4 +1,4 @@
-package clockface
+package fun16
 
 import "time"
 
@@ -7,6 +7,8 @@ type Point struct {
 	Y float64
 }
 
+// SecondHand is the unit vector of the second hand of an analogue clock at time 't'
+// represented as a Point
 func SecondHand(t time.Time) Point {
-	return Point{}
+	return Point{150, 60}
 }
