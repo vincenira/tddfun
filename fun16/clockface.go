@@ -1,6 +1,9 @@
 package fun16
 
-import "time"
+import (
+	"math"
+	"time"
+)
 
 type Point struct {
 	X float64
@@ -11,4 +14,8 @@ type Point struct {
 // represented as a Point
 func SecondHand(t time.Time) Point {
 	return Point{150, 60}
+}
+
+func secondsInRadians(t time.Time) float64 {
+	return float64(t.Second()) * (math.Pi / 30)
 }
