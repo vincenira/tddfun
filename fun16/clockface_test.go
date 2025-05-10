@@ -1,7 +1,6 @@
 package clockface_test
 
 import (
-	"projetpath/clockface"
 	"testing"
 	"time"
 )
