@@ -2,8 +2,17 @@ package fun16
 
 import (
 	"encoding/xml"
+	"io"
 	"math"
 	"time"
+)
+
+const (
+	secondHandLength = 90
+	minuteHandLength = 80
+	hourHandLength   = 50
+	clockCentreX     = 150
+	clockCentreY     = 150
 )
 
 type Point struct {
@@ -68,4 +77,14 @@ func secondHandPoint(t time.Time) Point {
 	y := math.Cos(angle)
 
 	return Point{x, y}
+}
+
+// SVGWriter writes an SVG representation of an analogue clock, showing the time, to the writer w
+func SVGWriter(w io.Writer, t time.Time) {
+	io.WriteString(w, svgStart)
+	io.WriteString(w, bezel)
+	secondHand(w, t)
+	minuteHand(w, t)
+	hourHand(w, t)
+	io.WriteString(w, svgEnd)
 }
