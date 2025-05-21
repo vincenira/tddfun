@@ -83,7 +83,7 @@ func secondHandPoint(t time.Time) Point {
 func SVGWriter(w io.Writer, t time.Time) {
 	io.WriteString(w, svgStart)
 	io.WriteString(w, bezel)
-	secondHand(w, t)
+	SecondHand(w, t)
 	minuteHand(w, t)
 	hourHand(w, t)
 	io.WriteString(w, svgEnd)
