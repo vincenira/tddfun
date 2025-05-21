@@ -20,7 +20,7 @@ type Point struct {
 	Y float64
 }
 
-type Svg struct {
+type SVG struct {
 	XMLName xml.Name `xml:"svg"`
 	Text    string   `xml:",chardata"`
 	Xmlns   string   `xml:"xmlns,attr"`
@@ -59,7 +59,7 @@ const svgEnd = `</svg>`
 
 // SecondHand is the unit vector of the second hand of an analogue clock at time 't'
 // represented as a Point
-func SecondHand(t time.Time) Point {
+func SecondHand(w io.Writer, t time.Time) {
 	p := secondHandPoint(t)
 	p = Point{p.X * 90, p.Y * 90}   // scale
 	p = Point{p.X, -p.Y}            // flip
