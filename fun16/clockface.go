@@ -84,7 +84,7 @@ func minuteHandPoint(t time.Time) Point {
 	return angleToPoint(minutesInRadians(t))
 }
 
-func minuteHand(w io.Writer, t time.Time) {
+func MinuteHand(w io.Writer, t time.Time) {
 	p := minuteHandPoint(t)
 	p = Point{p.X * minuteHandLength, p.Y * minuteHandLength}
 	p = Point{p.X, -p.Y}
@@ -104,7 +104,7 @@ func SVGWriter(w io.Writer, t time.Time) {
 	io.WriteString(w, svgStart)
 	io.WriteString(w, bezel)
 	SecondHand(w, t)
-	minuteHand(w, t)
+	MinuteHand(w, t)
 	hourHand(w, t)
 	io.WriteString(w, svgEnd)
 }
