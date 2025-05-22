@@ -1,5 +1,6 @@
 package main
 
+// will be used on its own directory to work
 import (
 	"fmt"
 	"io"
