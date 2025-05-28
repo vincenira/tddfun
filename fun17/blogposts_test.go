@@ -15,6 +15,10 @@ our package.
 func TestNewPosts(t *testing.T) {
 	// We've import testing/fstest which gives us access  to the fstest.MapFS type.
 	// Our fake file system will pass fstest.MapFS to our package
+	/*
+	   A MapFS is a simple in-memory file system for use in tests, represented as a map from path
+	   names (arguments to Open) to information about he files or directories they represent
+	*/
 	fs := fstest.MapFS{
 		"hello world.md":  {Data: []byte("hi")},
 		"hello-world2.md": {Data: []byte("hola")},
