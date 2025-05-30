@@ -2,7 +2,6 @@ package mypackage
 
 import (
 	"io/fs"
-	"testing/fstest"
 )
 
 type Post struct{}
@@ -21,7 +20,12 @@ Sliming is useful for giving a “skeleton” to your object. Designing an inter
 executing logic are two concerns, and sliming tests strategically lets you focus on one
 at a time.
 */
-func NewPostsFromFS(fileSystem fstest.MapFS) []Post {
+/*
+Refactor1: We can't use our new package outside of this context, because it is coupled to a concrete implementation
+(fstest.MapFS).but it doesn't have to be. Change the argument to our NewPostsFromFS function
+to accept the interface from the standard library.
+*/
+func NewPostsFromFS(fileSystem fs.FS) []Post {
 	// fs.ReadDir reads a directory inside a given fs.FS return []DirEntry
 	/*
 	   Already our idealised view of the world has been foiled because errors can happen,
