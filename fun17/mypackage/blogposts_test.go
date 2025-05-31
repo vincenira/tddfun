@@ -1,11 +1,26 @@
 package mypackage_test
 
 import (
+	"errors"
+	"io/fs"
+	"reflect"
 	"testing"
 	"testing/fstest"
 
 	"fun17/mypackage"
 )
+
+/*
+Add new test where we inject a failing fs.FS test-double to make fs.ReadDir return an error
+*/
+type StubFailingFS struct{}
+
+func (s StubFailingFS) Open(name string) (fs.File, error) {
+	return nil, errors.New("oh no, i always fail")
+}
+
+// later
+//_, err := mypackage.NewPostsFromFS(StubFailingFS{})
 
 /*
 Notice that the package of our test is blogposts_test. Remember, when TDD is practiced well
