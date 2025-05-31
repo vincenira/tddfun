@@ -4,7 +4,13 @@ import (
 	"io/fs"
 )
 
-type Post struct{}
+/*
+write the minimal amount of code for the test to run and check the failing test output
+add the new field to our Post type so that the test will run
+*/
+type Post struct {
+	Title string
+}
 
 // Write the minimal amount of code for the test to run and check the failing test output
 /*
@@ -25,7 +31,7 @@ Refactor1: We can't use our new package outside of this context, because it is c
 (fstest.MapFS).but it doesn't have to be. Change the argument to our NewPostsFromFS function
 to accept the interface from the standard library.
 */
-func NewPostsFromFS(fileSystem fs.FS) []Post {
+func NewPostsFromFS(fileSystem fs.FS) ([]Post, error) {
 	// fs.ReadDir reads a directory inside a given fs.FS return []DirEntry
 	/*
 	   Already our idealised view of the world has been foiled because errors can happen,
@@ -35,10 +41,13 @@ func NewPostsFromFS(fileSystem fs.FS) []Post {
 	   The rest of the code is straightforward: iterate over the entries, create a Post for each
 	   one and, return the slice.
 	*/
-	dir, _ := fs.ReadDir(fileSystem, ".")
+	dir, err := fs.ReadDir(fileSystem, ".")
+	if err != nil {
+		return nil, err
+	}
 	var posts []Post
 	for range dir {
 		posts = append(posts, Post{})
 	}
-	return posts
+	return posts, nil
 }
