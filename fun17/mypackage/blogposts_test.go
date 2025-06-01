@@ -76,6 +76,8 @@ func TestNewBlogPosts(t *testing.T) {
 	assertPost(t, posts[0], mypackage.Post{
 		Title:       "Post 1",
 		Description: "Description 1",
+		Tags:        []string{"tdd", "go"},
+		Body:        `HelloWorld`,
 	})
 }
 
