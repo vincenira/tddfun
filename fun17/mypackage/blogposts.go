@@ -9,9 +9,6 @@ import (
 write the minimal amount of code for the test to run and check the failing test output
 add the new field to our Post type so that the test will run
 */
-type Post struct {
-	Title string
-}
 
 // Write the minimal amount of code for the test to run and check the failing test output
 /*
