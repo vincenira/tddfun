@@ -1,6 +1,7 @@
 package mypackage
 
 import (
+	"io"
 	"io/fs"
 )
 
