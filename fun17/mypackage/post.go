@@ -1,13 +1,19 @@
 package mypackage
 
 import (
+	"bufio"
+	"bytes"
+	"fmt"
 	"io"
 	"io/fs"
+	"strings"
 )
 
 type Post struct {
 	Title       string
 	Description string
+	Tags        []string
+	Body        string
 }
 
 /*
