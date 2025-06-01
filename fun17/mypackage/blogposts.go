@@ -99,5 +99,5 @@ func loosenSeparatedGetPost(fileSystem fs.FS, f fs.DirEntry) (Post, error) {
 		return Post{}, err
 	}
 	defer postFile.Close()
-	return loosenNewPost(postFile)
+	return newPost(postFile)
 }
