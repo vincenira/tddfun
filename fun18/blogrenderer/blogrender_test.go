@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-	"fun17/blogrenderer"
+	"fun18/blogrenderer"
 )
 
 func TestRender(t *testing.T) {
