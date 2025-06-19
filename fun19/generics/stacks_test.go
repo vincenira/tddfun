@@ -1,6 +1,9 @@
 package generics
 
 import "testing"
+import (
+	"testing"
+)
 
 func TestStack(t *testing.T) {
 	t.Run("integer stack", func(t *testing.T) {
@@ -37,6 +40,7 @@ func TestStack(t *testing.T) {
 		AssertEqual(t, value, "123")
 		AssertTrue(t, myStackOfStrings.IsEmpty())
 	})
+
 	t.Run("Interface{}", func(t *testing.T) {
 		myStackOfStrings := new(StackOfStrings)
 		myStackOfStrings.Push("123")
@@ -44,6 +48,7 @@ func TestStack(t *testing.T) {
 		AssertEqualInterface(t, value, "123")
 	})
 }
+
 func TestStackG(t *testing.T) {
 	t.Run("integer stack", func(t *testing.T) {
 		myStackOfInts := NewStack[int]()
