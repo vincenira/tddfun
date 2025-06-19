@@ -37,4 +37,10 @@ func TestStack(t *testing.T) {
 		AssertEqual(t, value, "123")
 		AssertTrue(t, myStackOfStrings.IsEmpty())
 	})
+	t.Run("Interface{}", func(t *testing.T) {
+		myStackOfStrings := new(StackOfStrings)
+		myStackOfStrings.Push("123")
+		value, _ := myStackOfStrings.Pop()
+		AssertEqualInterface(t, value, "123")
+	})
 }
