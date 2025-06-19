@@ -1,6 +1,5 @@
 package generics
 
-import "testing"
 import (
 	"testing"
 )
@@ -37,6 +36,8 @@ func TestStack(t *testing.T) {
 		// add another thing, pop it back again
 		myStackOfStrings.Push("456")
 		value, _ := myStackOfStrings.Pop()
+		AssertEqual(t, value, "456")
+		value, _ = myStackOfStrings.Pop()
 		AssertEqual(t, value, "123")
 		AssertTrue(t, myStackOfStrings.IsEmpty())
 	})
