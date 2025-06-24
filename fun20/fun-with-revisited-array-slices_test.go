@@ -1,6 +1,8 @@
 package fun20
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestReduce(t *testing.T) {
 	t.Run("multiplication of all elements", func(t *testing.T) {
