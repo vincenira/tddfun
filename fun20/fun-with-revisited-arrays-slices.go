@@ -36,23 +36,10 @@ func SumAll(sliceNumbers ...[]int) []int {
 	return sumSlice
 }
 
-func SumAllTails(sliceNumbers ...[]int) []int {
-	var sums []int
-	var sum int
-	for _, sliceNumber := range sliceNumbers {
-		sum = 0
-		for i, number := range sliceNumber {
-			if i == 0 {
-				continue
-			}
-			sum += number
-		}
-		sums = append(sums, sum)
 func Reduce[A any](collection []A, f func(A, A) A, initialValue A) A {
 	result := initialValue
 	for _, x := range collection {
 		result = f(result, x)
 	}
-	return sums
 	return result
 }
