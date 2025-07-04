@@ -6,6 +6,11 @@ type Transaction struct {
 	Sum  float64
 }
 
+type Account struct {
+	Name    string
+	Balance float64
+}
+
 func BalanceFor(transactions []Transaction, name string) float64 {
 	adjustBalance := func(currentBalance float64, t Transaction) float64 {
 		if t.From == name {
