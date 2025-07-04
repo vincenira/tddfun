@@ -2,7 +2,7 @@ package fun20
 
 import "testing"
 
-func TestBadBank(t *testing.T) {
+func TestOldBadBank(t *testing.T) {
 	transactions := []Transaction{
 		{
 			From: "Chris",
@@ -18,4 +18,25 @@ func TestBadBank(t *testing.T) {
 	AssertEqual(t, BalanceFor(transactions, "Riya"), 100)
 	AssertEqual(t, BalanceFor(transactions, "Chris"), -75)
 	AssertEqual(t, BalanceFor(transactions, "Adil"), -25)
+}
+
+func TestBadBank(t *testing.T) {
+	var (
+		riya  = Account{Name: "Riya", Balance: 100}
+		chris = Account{Name: "Chris", Balance: 75}
+		adil  = Account{Name: "Adil", Balance: 200}
+
+		transactions = []Transaction{
+			NewTransaction(chris, riya, 100),
+			NewTransaction(adil, chris, 25),
+		}
+	)
+
+	newBalanceFor := func(account Account) float64 {
+		return NewBalanceFor(account, transactions).Balance
+	}
+
+	AssertEqual(t, newBalanceFor(transactions, "Riya"), 100)
+	AssertEqual(t, newBalanceFor(transactions, "Chris"), -75)
+	AssertEqual(t, newBalanceFor(transactions, "Adil"), -25)
 }
