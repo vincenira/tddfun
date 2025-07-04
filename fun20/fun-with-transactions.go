@@ -18,6 +18,18 @@ func NewTransaction(from, to Account, sum float64) Transaction {
 func NewBalanceFor(account Account, transactions []Transaction) Account {
 	return Reduce(transactions, applyTransaction, account)
 }
+
+func applyTransaction(a Account, transaction Transaction) Account {
+	if transaction.From == a.Name {
+		a.Balance -= transaction.Sum
+	}
+
+	if transaction.To == a.Name {
+		a.Balance += transaction.Sum
+	}
+	return a
+}
+
 func BalanceFor(transactions []Transaction, name string) float64 {
 	adjustBalance := func(currentBalance float64, t Transaction) float64 {
 		if t.From == name {
