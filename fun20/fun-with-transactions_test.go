@@ -53,4 +53,7 @@ func TestFind(t *testing.T) {
 		AssertTrue(t, found)
 		AssertEqual(t, firstEvenNumber, 2)
 	})
+	type Person struct {
+		Name string
+	}
 }
