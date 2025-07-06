@@ -1,6 +1,9 @@
 package fun20
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
 
 func TestOldBadBank(t *testing.T) {
 	transactions := []Transaction{
