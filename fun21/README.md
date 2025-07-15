@@ -7,3 +7,16 @@ what we want to do is listen for SIGTERM, and rather than instantly killing the 
 - Stop listening to any more requests
 - Allow any in-flight requests to finish
 - Then terminate the process
+
+## How to have grace
+
+[net/http/Server.Shutdown](https://pkg.go.dev/net/http#Server.Shutdown).
+Shutdown gracefully shuts down the server without interrupting any active connections.
+Shutdown works by first closing all open listeners, then closing all idle connections, and then
+waiting indefinitely for connections to return to idle and then shut down. if the provided context
+expires before the shutdown is complete, shutdown returns the context's error, otherwise it returns
+any error returned from closing the Server's underlying Listener(s).
+
+To handle `SIGTERM` we can use [os/signal.Notify](https://pkg.go.dev/os/signal#Notify), which will send any incoming signals
+to a channel we provide.
+With those two features from the standard library, you can listen for `SIGTERM` and shutdown gracefully
